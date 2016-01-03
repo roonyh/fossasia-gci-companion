@@ -1,30 +1,36 @@
-# electron-quick-start
+# FOSSASIA GCI Companion
 
-**Clone and run for a quick way to see an Electron in action.**
+This is a desktop app for FOSSASIA GCI students and mentors aiming to help them with some of their tasks.
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start) within the Electron documentation.
+## Features
+ ✓ = `implemented`
+ ✗ = `to do`
 
-A basic Electron application needs just these files:
+* Setting global git config for user name and email (✓)
+* Adding credentials for FOSSASIA GCI website (✗)
+* Updating your fork of FOSSASIA Github repos (✗)
 
-- `index.html` - A web page to render.
-- `main.js` - Starts the app and creates a browser window to render HTML.
-- `package.json` - Points to the app's main file and lists its details and dependencies.
+And more..
 
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start).
+## Development
 
-## To Use
+FOSSASIA GCI Companion is a desktop app that work on Linux, MacOS and Windows 64bit/32bit operating systems.
 
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+It's developed using the [electron](http://electron.atom.io/) platform.
 
-```bash
-# Clone this repository
-$ git clone https://github.com/atom/electron-quick-start
-# Go into the repository
-$ cd electron-quick-start
-# Install dependencies and run the app
-$ npm install && npm start
-```
+To build locally you need nodejs version 5.1.0 or later.
+Its good to have npm 3.5.0 or later as well.
+~~~
+$ node --version
+v5.1.0
+$ npm --version
+3.5.3
+~~~
 
-Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
+Fork, clone and run!
+~~~
+$ npm install
+$ npm start
+~~~
 
-#### License [CC0 (Public Domain)](LICENSE.md)
+Help development by working on an [issue](https://github.com/roonyh/fossasia-gci-companion/issues)
