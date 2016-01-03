@@ -10,6 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/atom/electron-quick-start.git"
   },
+  "engines": {
+    "electron": "0.36.2",
+    "atom-shell": "0.36.2"
+  },
   "keywords": [
     "Electron",
     "quick",
@@ -23,6 +27,9 @@
   },
   "homepage": "https://github.com/atom/electron-quick-start#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
+    "electron-prebuilt": "0.36.2"
+  },
+  "dependencies": {
+    "nodegit": "0.6.3"
   }
 }
