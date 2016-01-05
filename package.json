@@ -30,6 +30,7 @@
     "electron-prebuilt": "0.36.2"
   },
   "dependencies": {
+    "material-design-lite": "^1.0.6",
     "nodegit": "0.6.3"
   }
 }
