@@ -10,7 +10,9 @@ const configForm = document.querySelector('#git-config-form')
 git.getConfig()
 .then(function(config){
   configForm.querySelector('input[name="name"]').value = config.name;
+  configForm.querySelector('input[name="name"]').parentElement.className += ' is-dirty';
   configForm.querySelector('input[name="email"]').value = config.email;
+  configForm.querySelector('input[name="email"]').parentElement.className += ' is-dirty';
 }).
 catch(function(e){
   console.log('Error while getting config', e);
