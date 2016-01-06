@@ -4,6 +4,7 @@ const Git = require('nodegit');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
+const dialog = electron.dialog
 
 const oAuthGithub = require("./lib/oAuthGithub")({
   client_id: "",

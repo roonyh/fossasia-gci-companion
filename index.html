@@ -46,16 +46,5 @@
     </main>
   </div>
 </body>
-<script type="text/javascript">
-const electron = require("electron")
-const ipcRenderer = electron.ipcRenderer
-
-
-// receives a githubToken from a main process in main.js and stores it in localStorage api
-ipcRenderer.on("githubToken", function (event, token) {
-  window.localStorage.githubToken = token;
-})
-
-require("./git-config.js");
-</script>
+<script type="text/javascript" src="scripts/index.js"></script>
 </html>
