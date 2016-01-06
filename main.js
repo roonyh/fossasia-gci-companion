@@ -3,6 +3,12 @@ const electron = require('electron');
 const Git = require('nodegit')
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const oAuthGithub = require("./lib/oAuthGithub")({
+  client_id: "",
+  client_secret: "",
+  scopes: ["user:email", "notifications"]
+})
+var githubToken;
 
 let mainWindow;
 
@@ -16,10 +22,16 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
+  var indexUrl = "file://" + __dirname + "/index.html"
 
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
+  mainWindow.loadURL(indexUrl);
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+
+  oAuthGithub.openWindow(function (error, token) {
+    githubToken = token
+  })
+
 });

@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "material-design-lite": "^1.0.6",
-    "nodegit": "0.6.3"
+    "nodegit": "0.6.3",
+    "qs": "^6.0.1",
+    "request": "^2.67.0"
   }
 }
