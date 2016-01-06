@@ -33,4 +33,6 @@ $ npm install
 $ npm start
 ~~~
 
+Having troubles? See if someone else faced the same trouble and fixed it [here](https://github.com/roonyh/fossasia-gci-companion/wiki/Issues-while-building)
+
 Help development by working on an [issue](https://github.com/roonyh/fossasia-gci-companion/issues)
