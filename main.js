@@ -1,13 +1,16 @@
 'use strict';
 const electron = require('electron');
-const Git = require('nodegit')
+const Git = require('nodegit');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
+
 const oAuthGithub = require("./lib/oAuthGithub")({
   client_id: "",
   client_secret: "",
   scopes: ["user:email", "notifications"]
-})
+});
+
 var githubToken;
 
 let mainWindow;
@@ -22,7 +25,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
-  var indexUrl = "file://" + __dirname + "/index.html"
+  var indexUrl = "file://" + __dirname + "/index.html";
 
 
   mainWindow.loadURL(indexUrl);
@@ -30,8 +33,11 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  oAuthGithub.openWindow(function (error, token) {
-    githubToken = token
+  oAuthGithub.openWindow(function (error, tokenOptions) {
+    if (!error) {
+      githubToken = tokenOptions.access_token;
+      mainWindow.webContents.send('githubToken', githubToken);
+    }
   })
 
 });
