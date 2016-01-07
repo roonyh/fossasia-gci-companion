@@ -16,7 +16,7 @@ And more..
 
 FOSSASIA GCI Companion is a desktop app that work on Linux, MacOS and Windows 64bit/32bit operating systems.
 
-It's developed using the [electron](http://electron.atom.io/) platform.
+It's developed using the [electron](http://electron.atom.io/) platform. [Learn more](https://github.com/roonyh/fossasia-gci-companion/wiki/About-Electron-Platform)
 
 To build locally you need nodejs version 5.1.0 or later.
 Its good to have npm 3.5.0 or later as well.
