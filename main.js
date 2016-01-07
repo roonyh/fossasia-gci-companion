@@ -42,8 +42,8 @@ app.on('ready', function() {
         githubToken = tokenOptions.access_token;
         mainWindow.webContents.send('githubToken', githubToken);
       }
-    })
-  })
+    });
+  });
 
 
 });
