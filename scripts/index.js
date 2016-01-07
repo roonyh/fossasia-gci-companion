@@ -1,3 +1,4 @@
+require("../git-config.js");
 const electron = require("electron");
 const ipcRenderer = electron.ipcRenderer;
 
