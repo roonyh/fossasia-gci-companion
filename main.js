@@ -34,11 +34,16 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  oAuthGithub.openWindow(function (error, tokenOptions) {
-    if (!error) {
-      githubToken = tokenOptions.access_token;
-      mainWindow.webContents.send('githubToken', githubToken);
-    }
+  // listening to get a github token
+  ipcMain.on("getGithubToken", function (event, arg) {
+   // waits for an event from the renderer process to get the githubToken
+    oAuthGithub.openWindow(function (error, tokenOptions) {
+      if (!error) {
+        githubToken = tokenOptions.access_token;
+        mainWindow.webContents.send('githubToken', githubToken);
+      }
+    })
   })
+
 
 });
