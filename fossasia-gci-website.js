@@ -11,12 +11,15 @@ gciWebButton.mode = 'clone';
 gciWebButton.innerHTML = 'Clone';
 
 const pathField = document.querySelector('#clone-path');
+const errorText = document.querySelector('#gci-website__error');
 
 pathField.value = __dirname;
 updateStatuses(); // Update the statuses for the default value of the path
 
 function updateStatuses() {
   const path = pathField.value;
+
+  errorText.innerHTML = '';
 
   // Set default submit button's values
   gciWebButton.mode = 'clone';
@@ -204,6 +207,45 @@ gciWebButton.onclick = function(e) {
           gciWebButton.style.cursor = 'default';
           gciWebButton.innerHTML = 'Clone';
         }, 1500);
+      })
+      .catch(function(err) {
+        if(err.message.indexOf('exists and is not an empty directory') > -1) {  // The directory isn't empty
+          Git.Repository.open(path)
+          .then(function(repo) {
+            if(repo.isEmpty()) {  // The repo is empty
+              Git.Remote.create(repo, 'upstream', 'https://github.com/fossasia/gci15.fossasia.org.git');  // Create the remote 'upstream', pointing to FOSSASIA's repo
+              repo.fetchAll()
+              .then(function() {
+                repo.mergeBranches('gh-pages', 'upstream/gh-pages');
+                repo.checkoutBranch('upstream/gh-pages')
+                .then(function() {
+                  gciWebButton.innerHTML = 'Done!';
+                  document.querySelector('#gci-website__loading').className = 'mdl-spinner mdl-spinner--single-color mdl-js-spinner';  // Hide the loading spinner (by removing the 'is-active' class)
+                  setTimeout(function() { // Keep the button disabled with the "Done!" message for a moment
+                    gciWebButton.disabled = false;
+                    gciWebButton.style.cursor = 'default';
+                    gciWebButton.innerHTML = 'Clone';
+                  }, 1500);
+                })
+                .catch(function(err) {
+                  errorText.innerHTML = err.message;
+                });
+              });
+            }
+          })
+          .catch(function(err) {
+            errorText.innerHTML = err.message;
+          });
+        } else {
+          errorText.innerHTML = err.message;
+          gciWebButton.innerHTML = 'Error!';
+          document.querySelector('#gci-website__loading').className = 'mdl-spinner mdl-spinner--single-color mdl-js-spinner';  // Hide the loading spinner (by removing the 'is-active' class)
+          setTimeout(function() { // Keep the button disabled with the "Error!" message for a moment
+            gciWebButton.disabled = false;
+            gciWebButton.style.cursor = 'default';
+            gciWebButton.innerHTML = 'Clone';
+          }, 1500);
+        }
       });
   }
 }

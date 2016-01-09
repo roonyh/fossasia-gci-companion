@@ -44,13 +44,15 @@ main {
   font-weight: bold;
 }
 
-.gci-website__status {
-}
-
 .gci-website__status-yes {
   color: #4CAF50;
 }
 
 .gci-website__status-no {
+  color: #F44336;
+}
+
+#gci-website__error {
+  font-size: 12px;
   color: #F44336;
 }
