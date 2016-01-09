@@ -1,6 +1,8 @@
 'use strict';
 const electron = require('electron');
-const Git = require('nodegit')
+const ipcMain = require('electron').ipcMain;
+const dialog = require('electron').dialog;
+const Git = require('nodegit');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -21,5 +23,14 @@ app.on('ready', function() {
 
   mainWindow.on('closed', function() {
     mainWindow = null;
+  });
+});
+
+// Show a "open file/directory" dialog in the main window, with the options
+// provided in the .send call
+// (see http://goo.gl/56QIxx for details on the possible settings)
+ipcMain.on('openDialog', function(event, options) {
+  dialog.showOpenDialog(options, function(paths) {
+    event.sender.send('openDialogReply', paths);
   });
 });
