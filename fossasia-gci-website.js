@@ -66,7 +66,7 @@ function updateStatuses() {
           statusRepoText.innerHTML = 'is';
           repo.getRemote('upstream')
           .then(function(remote) {
-            if(remote.url() === 'https://github.com/fossasia/gci15.fossasia.org.git') { // "upstream" is set to FOSSASIA's repo
+            if(remote.url() === 'https://github.com/fossasia/gci15.fossasia.org.git' || remote.url() === 'https://github.com/fossasia/gci15.fossasia.org') { // "upstream" is set to FOSSASIA's repo
               gciWebButton.mode += '-origin';
               statusUpstreamIcon.className = 'material-icons gci-website__status-yes';
               statusUpstreamIcon.innerHTML = 'done';
@@ -76,7 +76,7 @@ function updateStatuses() {
             }
             repo.getRemote('origin')
             .then(function(remote) {
-              if(remote.url() !== 'https://github.com/fossasia/gci15.fossasia.org.git') { // "origin" is set to a custom repo
+              if(remote.url() !== 'https://github.com/fossasia/gci15.fossasia.org.git' && remote.url() !== 'https://github.com/fossasia/gci15.fossasia.org') { // "origin" is set to a custom repo
                 gciWebButton.mode += '-upstream';
                 statusOriginIcon.className = 'material-icons gci-website__status-yes';
                 statusOriginIcon.innerHTML = 'done';
