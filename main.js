@@ -7,8 +7,8 @@ const ipcMain = electron.ipcMain;
 const dialog = electron.dialog
 
 const oAuthGithub = require("./lib/oAuthGithub")({
-  client_id: "",
-  client_secret: "",
+  client_id: "client-id", // TODO: Load from a config file
+  client_secret: "client-secret", // TODO: Load from a config file
   scopes: ["user:email", "notifications"]
 });
 
@@ -46,4 +46,13 @@ app.on('ready', function() {
   });
 
 
+});
+
+// Show a "open file/directory" dialog in the main window, with the options
+// provided in the .send call
+// (see http://goo.gl/56QIxx for details on the possible settings)
+ipcMain.on('openDialog', function(event, options) {
+  dialog.showOpenDialog(options, function(paths) {
+    event.sender.send('openDialogReply', paths);
+  });
 });
