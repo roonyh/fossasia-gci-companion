@@ -2,6 +2,7 @@
 const electron = require('electron');
 const Git = require('nodegit');
 const app = electron.app;
+const jade = require('electron-jade')();
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 const dialog = electron.dialog
@@ -26,7 +27,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
-  var indexUrl = "file://" + __dirname + "/index.html";
+  var indexUrl = "file://" + __dirname + "/index.jade";
 
 
   mainWindow.loadURL(indexUrl);
