@@ -2,14 +2,14 @@
 const electron = require('electron');
 const Git = require('nodegit');
 const app = electron.app;
-const jade = require('electron-jade')();
+var jade = require('electron-jade')({ pretty: true }, {});
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 const dialog = electron.dialog
 
 const oAuthGithub = require("./lib/oAuthGithub")({
-  client_id: "client-id", // TODO: Load from a config file
-  client_secret: "client-secret", // TODO: Load from a config file
+  client_id: "", // TODO: Load from a config file
+  client_secret: "", // TODO: Load from a config file
   scopes: ["user:email", "notifications"]
 });
 
@@ -29,24 +29,10 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
   var indexUrl = "file://" + __dirname + "/index.jade";
 
-
   mainWindow.loadURL(indexUrl);
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
-
-  // listening to get a github token
-  ipcMain.on("getGithubToken", function (event, arg) {
-   // waits for an event from the renderer process to get the githubToken
-    oAuthGithub.openWindow(function (error, tokenOptions) {
-      if (!error) {
-        githubToken = tokenOptions.access_token;
-        mainWindow.webContents.send('githubToken', githubToken);
-      }
-    });
-  });
-
-
 });
 
 // Show a "open file/directory" dialog in the main window, with the options
@@ -55,5 +41,27 @@ app.on('ready', function() {
 ipcMain.on('openDialog', function(event, options) {
   dialog.showOpenDialog(options, function(paths) {
     event.sender.send('openDialogReply', paths);
+  });
+});
+
+// Listen to get a GitHub token
+ipcMain.on('getGithubToken', function (event, arg) {
+ // Waits for an event from the renderer process to get the githubToken
+  oAuthGithub.openWindow(function (error, tokenOptions) {
+    if (error) {  // Something went wrong
+      console.err(error);
+    }
+
+    githubToken = tokenOptions.access_token;
+    mainWindow.webContents.send('githubToken', githubToken);
+
+    oAuthGithub.requestUserData(githubToken, function(data, err) {
+      if (err) {  // Something went wrong
+        console.err(err);
+      }
+
+      jade = require('electron-jade')({ pretty: true }, { github: data });
+      mainWindow.loadURL("file://" + __dirname + "/index.jade");
+    })
   });
 });

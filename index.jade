@@ -48,25 +48,25 @@ html
                 #gci-website-statuses
                   span#gci-website__status-dir
                     span.material-icons.gci-website__status-icon.gci-website__status-no clear
-                    |                   Specified directory
+                    | Specified directory 
                     span.gci-website__status-no
                     | .
                   br
                   span#gci-website__status-repo
                     span.material-icons.gci-website__status-icon.gci-website__status-no clear
-                    |                   Repo
+                    | Repo 
                     span.gci-website__status-no
                     |  cloned.
                   br
                   span#gci-website__status-upstream
                     span.material-icons.gci-website__status-icon.gci-website__status-no clear
-                    |                   Remote "upstream"
+                    | Remote "upstream" 
                     span.gci-website__status-no
                     |  correctly configured.
                   br
                   span#gci-website__status-origin
                     span.material-icons.gci-website__status-icon.gci-website__status-no clear
-                    |                   Remote "origin"
+                    | Remote "origin" 
                     span.gci-website__status-no
                     |  set to a custom repo.
               .mdl-card__actions.mdl-card--border
@@ -75,57 +75,66 @@ html
                 #gci-website__loading.mdl-spinner.mdl-spinner--single-color.mdl-js-spinner
         section#scroll-tab-3.mdl-layout__tab-panel.is-active
           .page-content
-            .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-user
-              .github-avatar__container
-                img.github-avatar.mdl-shadow--3dp(src='#{github.user.avatar_url}')
-              h3.github-fullname
-                | #{github.user.name}
-                br
-                small #{github.user.login}
-              .mdl-card__actions.mdl-card--border
-                .mdl-card__supporting-text
-                  h5.github-section-title Repositories
-                  table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
-                    thead
-                      tr
-                        th.mdl-data-table__cell--non-numeric Name
-                        th
-                          span#github-repos__forks-icon.icon.material-icons call_split
-                          .mdl-tooltip(for='github-repos__forks-icon') Forks
-                        th
-                          span#github-repos__stars-icon.icon.material-icons star
-                          .mdl-tooltip(for='github-repos__stars-icon') Stars
-                        th
-                          span#github-repos__watchers-icon.icon.material-icons remove_red_eye
-                          .mdl-tooltip(for='github-repos__watchers-icon') Watchers
-                    tbody
-                      for each repo in github.repos
-                        tr
-                          td.mdl-data-table__cell--non-numeric
-                            span.github-repos__owner #{repo.owner.login}/
-                            | #{repo.name}
-                          td
-                            | #{repo.forks_count}
-                          td
-                            | #{repo.stargazers_count}
-                          td
-                            | #{repo.watchers_count}
+            if github
+              .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-user
+                .github-avatar__container
+                  img.github-avatar.mdl-shadow--3dp(src='#{github.user.avatar_url}')
+                h3.github-fullname
+                  | #{github.user.name}
                   br
-              .mdl-card__actions.mdl-card--border
-                .mdl-card__supporting-text
-                  h5.github-section-title Gists
-                  table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
-                    thead
-                      tr
-                        th #
-                        th.mdl-data-table__cell--non-numeric Files
-                    tbody
-                      for each gist,index in github.gists
+                  small #{github.user.login}
+                .mdl-card__actions.mdl-card--border
+                  .mdl-card__supporting-text
+                    h5.github-section-title Repositories
+                    table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
+                      thead
                         tr
-                          td
-                            | #{index}
-                          td.mdl-data-table__cell--non-numeric
-                            for each file,key in repo.files
-                            | #{key} 
-                  br
+                          th.mdl-data-table__cell--non-numeric Name
+                          th
+                            span#github-repos__forks-icon.icon.material-icons call_split
+                            .mdl-tooltip(for='github-repos__forks-icon') Forks
+                          th
+                            span#github-repos__stars-icon.icon.material-icons star
+                            .mdl-tooltip(for='github-repos__stars-icon') Stars
+                          th
+                            span#github-repos__watchers-icon.icon.material-icons remove_red_eye
+                            .mdl-tooltip(for='github-repos__watchers-icon') Watchers
+                      tbody
+                        tr
+                          for each repo in github.repos
+                            td.mdl-data-table__cell--non-numeric
+                              span.github-repos__owner #{repo.owner.login}/
+                              | #{repo.name}
+                            td
+                              | #{repo.forks_count}
+                            td
+                              | #{repo.stargazers_count}
+                            td
+                              | #{repo.watchers_count}
+                    br
+                .mdl-card__actions.mdl-card--border
+                  .mdl-card__supporting-text
+                    h5.github-section-title Gists
+                      table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
+                        thead
+                          tr
+                            th #
+                            th.mdl-data-table__cell--non-numeric Files
+                        tbody
+                          tr
+                            for each gist,index in github.gists
+                              td
+                                | #{index}
+                              for each element,file in gist.files
+                              td.mdl-data-table__cell--non-numeric
+                                | #{file}
+                      br
+            else
+              .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-notlogged
+                .mdl-card__title
+                  h2.mdl-card__title-text You're not logged in with GitHub!
+                .mdl-card__actions.mdl-card--border
+                  button#github-login-button.mdl-button.mdl-js-button.mdl-button--primary
+                    | Login With Github
+
   script(type='text/javascript', src='scripts/index.js')
