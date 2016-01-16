@@ -13,15 +13,13 @@ html
         .mdl-layout__header-row
           .mdl-card.mdl-shadow--3dp.app-header.absolute-center
         .mdl-layout__tab-bar.mdl-js-ripple-effect
-          a.mdl-layout__tab(href='#scroll-tab-1') Global Git Config
+          a.mdl-layout__tab.is-active(href='#scroll-tab-1') Global Git Config
           a.mdl-layout__tab(href='#scroll-tab-2') FOSSASIA GCI Website
-          a.mdl-layout__tab.is-active(href='#scroll-tab-3') GitHub
+          a.mdl-layout__tab(href='#scroll-tab-3') GitHub
       main.mdl-layout__content
-        section#scroll-tab-1.mdl-layout__tab-panel
+        section#scroll-tab-1.mdl-layout__tab-panel.is-active
           .page-content
             .mdl-card.mdl-card-wide.mdl-shadow--2dp
-              button#githubLoginBtn.mdl-button.mdl-js-button.mdl-button--primary
-                | Login With Github!
               .mdl-card__title.mdl-card--expand
                 h2.mdl-card__title-text Your Global Git Config
               .mdl-card__supporting-text
@@ -73,7 +71,7 @@ html
                 button#gci-website__button.mdl-button.mdl-js-button.mdl-js-ripple-effect Clone
                 span#gci-website__error
                 #gci-website__loading.mdl-spinner.mdl-spinner--single-color.mdl-js-spinner
-        section#scroll-tab-3.mdl-layout__tab-panel.is-active
+        section#scroll-tab-3.mdl-layout__tab-panel
           .page-content
             if github
               .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-user

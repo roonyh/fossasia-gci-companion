@@ -2,15 +2,15 @@
 const electron = require('electron');
 const Git = require('nodegit');
 const app = electron.app;
-var jade = require('electron-jade')({ pretty: true }, {});
+var jade = require('electron-jade')({ pretty: true });
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 const dialog = electron.dialog
 
-const oAuthGithub = require("./lib/oAuthGithub")({
-  client_id: "", // TODO: Load from a config file
-  client_secret: "", // TODO: Load from a config file
-  scopes: ["user:email", "notifications"]
+const oAuthGithub = require('./lib/oAuthGithub')({
+  client_id: 'your_client_id', // TODO: Load from a config file
+  client_secret: 'your_client_secret', // TODO: Load from a config file
+  scopes: ['repo', 'gist']
 });
 
 var githubToken;
@@ -27,7 +27,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
-  var indexUrl = "file://" + __dirname + "/index.jade";
+  var indexUrl = 'file://' + __dirname + '/index.jade';
 
   mainWindow.loadURL(indexUrl);
   mainWindow.on('closed', function() {
@@ -35,7 +35,7 @@ app.on('ready', function() {
   });
 });
 
-// Show a "open file/directory" dialog in the main window, with the options
+// Show a 'open file/directory' dialog in the main window, with the options
 // provided in the .send call
 // (see http://goo.gl/56QIxx for details on the possible settings)
 ipcMain.on('openDialog', function(event, options) {

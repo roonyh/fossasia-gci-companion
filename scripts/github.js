@@ -54,4 +54,4 @@ function requestUserData(token, cb) {
 
 module.exports = {
   requestUserData: requestUserData
-}
+};
