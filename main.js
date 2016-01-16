@@ -54,14 +54,5 @@ ipcMain.on('getGithubToken', function (event, arg) {
 
     githubToken = tokenOptions.access_token;
     mainWindow.webContents.send('githubToken', githubToken);
-
-    oAuthGithub.requestUserData(githubToken, function(data, err) {
-      if (err) {  // Something went wrong
-        console.err(err);
-      }
-
-      jade = require('electron-jade')({ pretty: true }, { github: data });
-      mainWindow.loadURL("file://" + __dirname + "/index.jade");
-    })
   });
 });
