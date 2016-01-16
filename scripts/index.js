@@ -29,3 +29,38 @@ document.getElementById('github-login-button').addEventListener('click', functio
 
   ipcRenderer.send('getGithubToken');
 });
+
+// Event listeners for the drawer links
+
+document.getElementById('nav1').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  document.getElementById('scroll-tab-2').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-3').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-1').className += ' is-active';
+
+  document.getElementById('drawer').className = 'mdl-layout__drawer';
+  document.getElementsByClassName('mdl-layout__obfuscator')[0].className = 'mdl-layout__obfuscator';
+});
+
+document.getElementById('nav2').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  document.getElementById('scroll-tab-1').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-3').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-2').className += ' is-active';
+
+  document.getElementById('drawer').className = 'mdl-layout__drawer';
+  document.getElementsByClassName('mdl-layout__obfuscator')[0].className = 'mdl-layout__obfuscator';
+});
+
+document.getElementById('nav3').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  document.getElementById('scroll-tab-1').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-2').className = 'mdl-layout__tab-panel';
+  document.getElementById('scroll-tab-3').className += ' is-active';
+
+  document.getElementById('drawer').className = 'mdl-layout__drawer';
+  document.getElementsByClassName('mdl-layout__obfuscator')[0].className = 'mdl-layout__obfuscator';
+});
