@@ -1,0 +1,56 @@
+.page-content
+  if github
+    .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-user
+      .github-avatar__container
+        img.github-avatar.mdl-shadow--3dp(src='#{github.user.avatar_url}')
+      h3.github-fullname #{github.user.name}
+        br
+        small #{github.user.login}
+      .mdl-card__actions.mdl-card--border
+        .mdl-card__supporting-text
+          h5.github-section-title Repositories
+          table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
+            thead
+              tr
+                th.mdl-data-table__cell--non-numeric Name
+                th
+                  div#github-repos__forks-icon.icon.material-icons call_split
+                  .mdl-tooltip(for='github-repos__forks-icon') Forks
+                th
+                  div#github-repos__stars-icon.icon.material-icons star
+                  .mdl-tooltip(for='github-repos__stars-icon') Stars
+                th
+                  div#github-repos__watchers-icon.icon.material-icons remove_red_eye
+                  .mdl-tooltip(for='github-repos__watchers-icon') Watchers
+            tbody
+                each repo in github.repos
+                  tr
+                    td.mdl-data-table__cell--non-numeric
+                      span.github-repos__owner #{repo.owner.login}/
+                      | #{repo.name}
+                      td #{repo.forks_count}
+                      td #{repo.stargazers_count}
+                      td #{repo.watchers_count}
+          br
+      .mdl-card__actions.mdl-card--border
+        .mdl-card__supporting-text
+          h5.github-section-title Gists
+          table.mdl-data-table.mdl-js-data-table.mdl-data-table.mdl-shadow--3dp.github-table
+            thead
+              tr
+                th #
+                th.mdl-data-table__cell--non-numeric Files
+            tbody
+                each gist,index in github.gists
+                  tr
+                    td #{index}
+                    each element,file in gist.files
+                      td.mdl-data-table__cell--non-numeric #{file}
+            br
+  else
+    .mdl-card.mdl-card-wide.mdl-shadow--2dp.github-notlogged
+      .mdl-card__title
+        h2.mdl-card__title-text You're not logged in with GitHub!
+      .mdl-card__actions.mdl-card--border
+        button#github-login-button.mdl-button.mdl-js-button.mdl-button--primary
+          | Login With Github

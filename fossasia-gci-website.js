@@ -135,13 +135,13 @@ pathField.onclick = function(e) {
 
   // Display the dialog
   ipcRenderer.send('openDialog', options);
-}
+};
 
 pathField.oninput = function(e) {
   e.preventDefault();
 
   updateStatuses();
-}
+};
 
 gciWebButton.onclick = function(e) {
   e.preventDefault();
@@ -248,4 +248,4 @@ gciWebButton.onclick = function(e) {
         }
       });
   }
-}
+};

@@ -1,10 +1,19 @@
 'use strict';
 const electron = require('electron');
-const ipcMain = require('electron').ipcMain;
-const dialog = require('electron').dialog;
 const Git = require('nodegit');
 const app = electron.app;
+var jade = require('electron-jade')({ pretty: true });
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
+const dialog = electron.dialog
+
+const oAuthGithub = require('./lib/oAuthGithub')({
+  client_id: 'your_client_id', // TODO: Load from a config file
+  client_secret: 'your_client_secret', // TODO: Load from a config file
+  scopes: ['repo', 'gist']
+});
+
+var githubToken;
 
 let mainWindow;
 
@@ -18,19 +27,32 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
+  var indexUrl = 'file://' + __dirname + '/index.jade';
 
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
-
+  mainWindow.loadURL(indexUrl);
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
 });
 
-// Show a "open file/directory" dialog in the main window, with the options
+// Show a 'open file/directory' dialog in the main window, with the options
 // provided in the .send call
 // (see http://goo.gl/56QIxx for details on the possible settings)
 ipcMain.on('openDialog', function(event, options) {
   dialog.showOpenDialog(options, function(paths) {
     event.sender.send('openDialogReply', paths);
+  });
+});
+
+// Listen to get a GitHub token
+ipcMain.on('getGithubToken', function (event, arg) {
+ // Waits for an event from the renderer process to get the githubToken
+  oAuthGithub.openWindow(function (error, tokenOptions) {
+    if (error) {  // Something went wrong
+      console.err(error);
+    }
+
+    githubToken = tokenOptions.access_token;
+    mainWindow.webContents.send('githubToken', githubToken);
   });
 });

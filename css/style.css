@@ -33,7 +33,13 @@ header .mdl-layout__header-row {
 }
 
 main {
-  margin: 30px auto;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+section {
+  margin-left: 25vw;
 }
 
 #gci-website-statuses .material-icons {
@@ -55,4 +61,47 @@ main {
 #gci-website__error {
   font-size: 12px;
   color: #F44336;
+}
+
+.github-notlogged {
+  min-height: inherit;
+}
+
+.github-user {
+  overflow: visible;
+  margin-top: 80px;
+}
+
+.github-avatar__container {
+  margin-top: -70px;
+}
+
+.github-avatar {
+  height: 140px;
+  width: 140px;
+  margin: 0 auto;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: block;
+}
+
+.github-fullname {
+  text-align: center;
+}
+
+.github-username {
+  text-align: center;
+}
+
+.github-section-title {
+  text-transform: uppercase;
+}
+
+.github-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.github-repos__owner {
+  color: rgba(0, 0, 0, .30);
 }
