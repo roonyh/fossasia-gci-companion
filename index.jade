@@ -12,10 +12,12 @@ html
       header.mdl-layout__header.mdl-shadow--2dp
         .mdl-layout__header-row
           .mdl-card.mdl-shadow--3dp.app-header.absolute-center
-        .mdl-layout__tab-bar.mdl-js-ripple-effect
-          a.mdl-layout__tab.is-active(href='#scroll-tab-1') Global Git Config
-          a.mdl-layout__tab(href='#scroll-tab-2') FOSSASIA GCI Website
-          a.mdl-layout__tab(href='#scroll-tab-3') GitHub
+      #drawer.mdl-layout__drawer
+        span.mdl-layout-title GCI Companion
+        nav.mdl-navigation
+          a#nav1.mdl-navigation__link(href='#') Global Git Config
+          a#nav2.mdl-navigation__link(href='#') FOSSASIA GCI Website
+          a#nav3.mdl-navigation__link(href='#') GitHub
       main.mdl-layout__content
         section#scroll-tab-1.mdl-layout__tab-panel.is-active
           .page-content
