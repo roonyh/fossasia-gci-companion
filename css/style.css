@@ -83,8 +83,6 @@ section {
   border: 3px solid white;
   border-radius: 50%;
   display: block;
-  /*background: url("../img/avatar.jpg") no-repeat;
-  background-size: contain;*/
 }
 
 .github-fullname {
